@@ -1,12 +1,11 @@
 # syntax=docker/dockerfile:1
 
-FROM eclipse-temurin:8 AS base
+FROM eclipse-temurin:17
 WORKDIR /code
 
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
-RUN ./mvnw dependency:resolve
+COPY . ./
+RUN ./mvnw package
 
-COPY src ./src
+WORKDIR ./target
 
-CMD ["./mvnw", "spring-boot:run"]
+CMD ["java", "-jar", "*.jar"]
