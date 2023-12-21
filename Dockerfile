@@ -1,10 +1,11 @@
-FROM eclipse-temurin:17
-WORKDIR /code
-
+FROM eclipse-temurin:17 as builder
+WORKDIR /app
 COPY . ./
 RUN ./mvnw package
 
-EXPOSE 80
-WORKDIR ./target
 
+FROM eclipse-temurin:17-jre as runner
+EXPOSE 80
+WORKDIR /code
+COPY --from=builder /app/target/*.jar ./
 CMD java -jar ./*.jar
