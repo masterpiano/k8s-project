@@ -16,5 +16,3 @@ spec:
         image: {{ .Values.image.repository }}
         resources:
         {{ toYaml .Values.resources | nindent 10}}
-        ports:
-        - containerPort: 80
