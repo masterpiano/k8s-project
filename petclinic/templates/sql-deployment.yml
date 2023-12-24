@@ -19,5 +19,3 @@ spec:
         envFrom:
         - configMapRef:
             name: {{ include "petclinic.fullname" .}}
-        ports:
-        - containerPort: 80
