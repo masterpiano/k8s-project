@@ -16,5 +16,8 @@ spec:
         image: {{ .Values.imageSQL.repository }}
         resources:
         {{ toYaml .Values.resources | nindent 10}}
+        envFrom:
+        - configMapRef:
+            name: {{ include "petclinic.fullname" .}}
         ports:
         - containerPort: 80
