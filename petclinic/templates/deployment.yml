@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "petclinic.fullname" . }}
+spec:
+  selector:
+    matchLabels:
+      {{ include "petclinic.selectorLabels" .| nindent 8}}
+  template:
+    metadata:
+      labels:
+        {{ include "petclinic.labels" .| nindent 10}}
+    spec:
+      containers:
+      - name: {{ include "petclinic.fullname" .}}
+        image: {{ .Values.image.repository }}
+        resources:
+        {{ toYaml .Values.resources | nindent 10}}
