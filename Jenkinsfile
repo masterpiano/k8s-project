@@ -3,7 +3,7 @@ pipeline {
 
 	environment {
     	DOCKER_CREDENTIALS = credentials('docker-credentials')
-        DOCKER_IMAGE = "${DOCKER_CREDENTIALS_USR}/petclinic:${env.BUILD_NUMBER}"
+        DOCKER_IMAGE = "${DOCKER_CREDENTIALS_USR}/petclinic"
 	}
 
 	
@@ -42,8 +42,11 @@ pipeline {
 		stage('Deploy') {
 			steps {
 				script{
+					def currentBuildImage = "${DOCKER_IMAGE}:${env.BUILD_NUMBER}"
+					sh "docker tag ${DOCKER_IMAGE} ${currentBuildImage}"
 					docker.withRegistry('https://index.docker.io/v1/', 'docker-credentials') {
 						sh "docker push ${DOCKER_IMAGE}"
+						sh "docker push ${currentBuild}"
 					}
 					echo 'The pipeline worked succesfully'
 				}
