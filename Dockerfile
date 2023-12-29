@@ -1,6 +1,6 @@
 FROM eclipse-temurin:17-alpine as builder
 WORKDIR /app
-COPY . ./
+COPY ./spring-petclinic ./
 # RUN chmod +x mvnw
 RUN ./mvnw package
 
