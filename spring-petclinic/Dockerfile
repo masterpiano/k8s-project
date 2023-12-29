@@ -1,7 +1,7 @@
 FROM eclipse-temurin:17-alpine as builder
 WORKDIR /app
 COPY . ./
-RUN chmod +x mvnw
+# RUN chmod +x mvnw
 RUN ./mvnw package
 
 FROM eclipse-temurin:17-jre-alpine as runner
