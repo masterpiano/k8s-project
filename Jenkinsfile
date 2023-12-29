@@ -46,7 +46,7 @@ pipeline {
 					sh "docker tag ${DOCKER_IMAGE} ${currentBuildImage}"
 					docker.withRegistry('https://index.docker.io/v1/', 'docker-credentials') {
 						sh "docker push ${DOCKER_IMAGE}"
-						sh "docker push ${currentBuild}"
+						sh "docker push ${currentBuildImage}"
 					}
 					echo 'The pipeline worked succesfully'
 				}
