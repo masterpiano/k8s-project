@@ -1,9 +1,5 @@
 pipeline {
 	agent any
-  	parameters {
-    	string(name: 'AWS_DEFAULT_REGION', defaultValue: 'us-east-1', description: 'The region of the AWS')
-		string(name: 'REPEAT_TIME_SECONDS', defaultValue: '300', description: 'Period of time to check the working AWS instnces')
-  	}
 
 	environment {
     	DOCKER_CREDENTIALS = credentials('docker-credentials')
